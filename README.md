@@ -12,7 +12,7 @@
 * Tham khảo thêm về liqid haravan: ```https://docs.haravan.com/blogs/co-ban```
 
 ### API GET thời gian trống của các chi nhánh (locations)
-* url = ```'https://booking-app.vn/api/locations.json?shop_domain={{ shop.domain }}```
+* url = ```/api/locations.json?shop_domain={{ shop.domain }}```
 * method: ```GET```
 * url ```/api/variants.json?shop_domain```
 * headers: ```Không có```
