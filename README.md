@@ -1,5 +1,9 @@
 # Booking App API
 * Root URL: ```https://booking-app.vn/```
+##Code mẫu tham khảo ở các file .txt:
+* Trang nhóm sản phẩm: ```colection_demo.txt```
+* Trang sản phẩm: ```demo_product.txt```
+* Trang chủ haravan: ```colection_demo.txt```
 ### API danh sách biến thể đặt lịch
 * method: ```GET```
 * url ```/api/variants.json?shop_domain```
@@ -9,6 +13,11 @@
 
 ### API GET thời gian trống của các chi nhánh (locations)
 * url = ```'https://booking-app.vn/api/locations.json?shop_domain={{ shop.domain }}```
+* method: ```GET```
+* url ```/api/variants.json?shop_domain```
+* headers: ```Không có```
+* shop_domain là haravan url của shop, ví dụ: ```https://booking-app.myharavan.com/``` hoặc ```https://yourdomain.com/```
+* Tham khảo thêm về liqid haravan: ```https://docs.haravan.com/blogs/co-ban```
 * Code mẫu: 
 ```
 <script>
