@@ -1,0 +1,548 @@
+<!-- Bắt đầu phần Modal hiện ra block lịch, có thể thay đổi html và CSS, lưu ý các trường id của select trong mybookingappForm cần giữ nguyên -->
+
+                                <div id="myBookingAppModal" class="booking_app_modal">
+                                    <!-- Modal content -->
+                                    <div class="booking_app_modal-body">
+                                        <div class="booking_app_modal-header">
+                                            <span class="booking_app_modal_close">&times;</span>
+                                            <h4>Đặt lịch tại {{ shop.name }}</h4>
+                                        </div>
+                                        <form id="mybookingappForm">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="p-3 mb-2">
+                                                        <select id="variant_id" name="variant_id" class="next-input"
+                                                                required>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="p-3 mb-2">
+                                                        <label
+                                                                class="label-input-group">Chi nhánh*</label>
+                                                        <div class="">
+                                                            <select id="location_id" name="location_id"
+                                                                    class="next-input"
+                                                                    required>
+                                                                <option value="000">Chưa chọn</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="p-3 mb-2">
+                                                        <label
+                                                                class="label-input-group">Giờ bắt đầu*</label>
+                                                        <div class=""><select id="free_time" name="free_time"
+                                                                              class="next-input" required>
+
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="p-3 mb-2">
+                                                        <label
+                                                                class="label-input-group">Họ và tên*</label>
+                                                        <input id="booking_app_customer_name" type="text"
+                                                               name="booking_app_customer_name"
+                                                               class="next-input"
+                                                               placeholder="Họ và Tên" required>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="p-3 mb-2">
+                                                        <label
+                                                                class="label-input-group">Số
+                                                            điện
+                                                            thoại*</label>
+                                                        <input id="phone" type="tel" name="phone"
+                                                               class="next-input"
+                                                               placeholder="097xxxxxxxx" pattern="[0-9]{10}" required>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div id="shop_delivery_or_not" name="shop_delivery_or_not">
+
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="p-3 mb-2">
+                                                        <button type="submit" name="book_event" id="book_event"
+                                                                class="btn btn-primary btn-lg btn-block"
+                                                                value="{{ variant_id }}">
+
+                                                            BookNow
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="booking_app_modal-footer">
+                                                <h5> {{ shop.name }} Sẽ liên hệ lại với quý khách</h5>
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <!-- Kết thúc phần Modal đặt lịch -->
+<div id="collection" class="collection-page">
+    {% paginate collection.products by settings.pagination_limit %}
+        <div class="breadcrumb-shop">
+            <div class="container-fluid">
+                <div class="row">{% include 'breadcrumb' %}    </div>
+            </div>
+        </div>
+        {% if settings.show_collection_image %}
+            <div class=" banner-collection-header">
+                {% if collection.image != blank %}
+                    <img src="{{ collection.image.src }}" alt="{{ collection.title }}"/>
+                {% else %}
+                    <img src="{{ settings.collection_banner }}" alt="{{ collection.title }}"/>
+                {% endif %}
+            </div>
+        {% endif %}
+        <div class="main-content ">
+            <div class="container-fluid">
+                <div class="row">
+                    <div id="collection-body" class="wrap-collection-body clearfix">
+                        {%-assign check_menu = false- %}
+                        {%-if settings.collection_sidebar != "" and linklists[settings.collection_sidebar].links.size > 0- %}
+                        {%-assign check_menu = true- %}
+                        {%-endif- %}
+
+                        {%-if settings.show_collection_filter- %}
+                        {%-assign check_menu = true- %}
+                        {%-endif- %}
+
+                        {%-if check_menu- %}
+                            <div class="col-md-3 col-sm-12 col-xs-12 sidebar-fix">
+                                <div class="wrap-filter">
+                                    {% include 'sidebar-left-collection' %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div class="{% if check_menu %}col-md-9{% else %}col-md-12{% endif %} col-sm-12 col-xs-12">
+                            <div class="wrap-collection-title row">
+                                <div class="heading-collection row">
+                                    <div class="col-md-8 col-sm-12 col-xs-12">
+                                        <h1 class="title">
+                                            {% if collection.handle == 'all' %}Tất cả sản phẩm{% else %}
+                                                {{ collection.title }}{% endif %}
+                                        </h1>
+                                        {% if collection.products.size == 0 %}
+                                            <div class="alert-no"><p>Chưa có sản phẩm nào trong danh mục này</p></div>
+                                        {% else %}
+                                            <div class="alert-no-filter"></div>
+                                        {% endif %}
+                                    </div>
+                                    {% if  settings.collection_sort and collection.products_count > 0 %}
+                                        <div class="col-md-4 hidden-sm hidden-xs">
+                                            <div class="option browse-tags">
+                                                <label class="lb-filter hide" for="sort-by">Sắp xếp theo:</label>
+                                                <span class="custom-dropdown custom-dropdown--grey">
+											<select class="sort-by custom-dropdown__select">
+												{% unless collection.handle == 'all' %}
+                                                    <option value="manual">Sản phẩm nổi bật</option>
+                                                {% endunless %}
+                                                <option value="price-ascending"
+                                                        data-filter="&sortby=(price:product=asc)">Giá: Tăng dần</option>
+												<option value="price-descending"
+                                                        data-filter="&sortby=(price:product=desc)">Giá: Giảm dần</option>
+												<option value="title-ascending"
+                                                        data-filter="&sortby=(title:product=asc)">Tên: A-Z</option>
+												<option value="title-descending"
+                                                        data-filter="&sortby=(price:product=desc)">Tên: Z-A</option>
+												<option value="created-ascending"
+                                                        data-filter="&sortby=(updated_at:product=desc)">Cũ nhất</option>
+												<option value="created-descending"
+                                                        data-filter="&sortby=(updated_at:product=asc)">Mới nhất</option>
+												<option value="best-selling"
+                                                        data-filter="&sortby=(sold_quantity:product=desc)">Bán chạy nhất</option>
+												<option value="quantity-descending">Tồn kho: Giảm dần</option>
+											</select>
+										</span>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% if collection.products.size > 0 %}
+                                
+                                <div class="row filter-here">
+                                    <div class="content-product-list product-list filter clearfix">
+                                        {% for product in collection.products limit: settings.pagination_limit %}
+                                            <div class="col-md-3 col-sm-6 col-xs-6 pro-loop {% if check_menu %}col-4{% else %}col-5{% endif %}">
+                                                {% include 'product-loop' with collection.handle %}
+
+                                                <!-- Phần chọn biến thể đặt lịch phần này nên đặt ở cạnh nút giỏ hàng, có thể thay tên nút ở các ô text html-->
+                                                <!-- Nút chọn biến thể dịch vụ khách cần đặt -->
+                                                {% if  product.available %}
+                                                    {% for protag in product.tags %}
+                                                        {% if protag contains 'duration_time_' %}
+                                                            <h4>
+                                                                CHỌN DỊCH VỤ VÀ BẤM NÚT ĐẶT LỊCH
+                                                            </h4>
+                                                            <h5>{{ protag | replace: 'duration_time_', 'Thời gian ' }}
+                                                                phút</h5>
+                                                            <select id="change_booking_button{{ product.id }}">
+                                                                {% for variant in product.variants %}
+                                                                    {% if variant.inventory_policy =='continue' or product.available %}
+                                                                        <option value="{{ variant.id }}">{{ variant.title }}-{{ variant.price | money }}
+                                                                        </option>
+
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </select>
+                                                            <br><br>
+                                                            <button id="{{ product.id }}"
+                                                                    name="booking_app_variant_submit_button"
+                                                                    value="{{ product.name }}"
+                                                                    type="button"
+                                                                    class="booking_app_variant_submit_button btn">Đặt
+                                                                lịch
+                                                            </button>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <!-- Kết thúc phần nút đặt lịch -->
+
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="sortpagibar pagi clearfix text-center">
+                                        {% include 'pagination-default' %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endpaginate %}
+    <input type="text" class="hidden" id="coll-handle"
+           value="{% if collection.handle == 'all' %}(collectionid:product>0){% else %}(collectionid:product={{ collection.id }}){% endif %}"/>
+</div>
+<script>
+    Haravan.queryParams = {};
+    if (location.search.length) {
+        for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+            aKeyValue = aCouples[i].split('=');
+            if (aKeyValue.length > 1) {
+                Haravan.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+            }
+        }
+    }
+    var collFilters = jQuery('.coll-filter');
+    collFilters.change(function () {
+        var newTags = [];
+        var newURL = '';
+        delete Haravan.queryParams.page;
+        collFilters.each(function () {
+            if (jQuery(this).val()) {
+                newTags.push(jQuery(this).val());
+            }
+        });
+        {% if collection.handle %}
+            newURL = '/collections/' + '{{ collection.handle }}';
+            if (newTags.length) {
+                newURL += '/' + newTags.join('+');
+            }
+            var search = jQuery.param(Haravan.queryParams);
+            if (search.length) {
+                newURL += '?' + search;
+            }
+            location.href = newURL;
+        {% else %}
+            if (newTags.length) {
+                Haravan.queryParams.constraint = newTags.join('+');
+            } else {
+                delete Haravan.queryParams.constraint;
+            }
+            location.search = jQuery.param(Haravan.queryParams);
+        {% endif %}
+    });
+    jQuery('.sort-by')
+        .val('{{ collection.sort_by | default: collection.default_sort_by  }}')
+        .bind('change', function () {
+            Haravan.queryParams.sort_by = jQuery(this).val();
+            location.search = jQuery.param(Haravan.queryParams);
+        });
+</script>
+<script>
+	var booking_app_modal = document.getElementsByClassName("booking_app_modal")[0];
+	$('.booking_app_variant_submit_button').click(function() {
+		var nottice_alert = 'Xác nhận đặt lịch cho dịch vụ. Quý khách vui lòng chọn chi nhánh, và thời gian đặt lịch, chúng tôi sẽ liên hệ lại!';
+		alert(nottice_alert);
+		booking_app_modal.style.display = "block";
+		});
+		$('.booking_app_modal_close').click(function() {
+		booking_app_modal.style.display = "none";
+		});
+		window.onclick = function (event) {
+							if (event.target == booking_app_modal) {
+									booking_app_modal.style.display = "none";
+							}
+					}
+</script>
+
+<script>
+    $('.booking_app_variant_submit_button').click(function () {
+
+        var mylist = document.getElementById("change_booking_button"+this.id);
+        var variant = mylist.options[mylist.selectedIndex];
+        $("#variant_id").html('<option value="' + variant.value + '">' + variant.text + '</option>');
+        var xmlhttp = new XMLHttpRequest();
+        var url = 'https://booking-app.vn/api/locations.json?shop_domain={{ shop.domain }}';
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var myArr = JSON.parse(this.responseText);
+                booking_app_location_Function(myArr);
+            }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+
+        function booking_app_location_Function(myJson) {
+            var shop_delivery_or_not_html = '<div class="row">\n' +
+                '                            <div class="col">\n' +
+                '                                <div class="p-3 mb-2">\n' +
+                '                                    <input class="checkbox" type="checkbox" id="at_customer_address"\n' +
+                '                                           name="at_customer_address"\n' +
+                '                                           value="checked">\n' +
+                '                                    <label for="at_customer_address"> Dịch vụ tận nơi</label><br>\n' +
+                '                                    <div class="h5" id="customer_address_and_note" name="customer_address_and_note">\n' +
+                '                                        Tới địa chỉ của {{ shop.name }}\n' +
+                '                                    </div>\n' +
+                '              \t\t\t\t\t\t\t\t\t\t<br>\n' +
+                '                                </div>\n' +
+                '                            </div>\n' +
+                '                        </div>';
+            if (myJson.delivery_service) {
+                document.getElementById("shop_delivery_or_not").innerHTML = shop_delivery_or_not_html;
+                $('#at_customer_address').click(function () {
+                    if ($(this).prop("checked")) {
+                        document.getElementById("customer_address_and_note").innerHTML = '<input type="text" class="form-control" placeholder="Điền địa chỉ của bạn!" id="booking_app_customer_address" name="booking_app_customer_address">';
+                    } else {
+                        document.getElementById("customer_address_and_note").innerHTML = "Tới địa chỉ của {{ location.name }}: {{ location.address1 }}";
+                    }
+                });
+            }
+            ;
+            $("#location_id").html("")
+            $("#location_id").append('<option value="000">Chưa chọn</option>');
+            $.each(myJson.location, function (index, value) {
+                $("#location_id").append('<option value="' + value.id + '">' + value.name + '</option>');
+            });
+
+            $('#location_id').on('change', function () {
+                $("#free_time").html("")
+                console.log($(this).val());
+                for (var i = 0; i < myJson.location.length; i++) {
+                    if (myJson.location[i].id == $(this).val()) {
+                        $.each(myJson.location[i].free_time, function (index, value) {
+                            $("#free_time").append('<option value="' + value + '">' + value + '</option>');
+                        });
+                    }
+                }
+            });
+        }
+
+    });
+</script>
+
+<script>
+    window.addEventListener("load", function () {
+        function sendData() {
+            const XHR = new XMLHttpRequest();
+
+            // Bind the FormData object and the form element
+            const FD = new FormData(form);
+            // Define what happens on successful data submission
+            XHR.addEventListener("load", function (event) {
+                alert(event.target.responseText);
+                $('#myBookingAppModal').modal('hide');
+            });
+
+            // Define what happens in case of error
+            XHR.addEventListener("error", function (event) {
+                alert('Có lỗi xảy ra, liên hệ shop để đặt lịch trực tiếp');
+            });
+
+            // Set up our request
+            XHR.open("POST", 'https://booking-app.vn/api/book');
+
+            // The data sent is what the user provided in the form
+            XHR.send(FD);
+        }
+
+        // Access the form element...
+        const form = document.getElementById("mybookingappForm");
+
+        // ...and take over its submit event.
+        form.addEventListener("submit", function (event) {
+            alert("Server đang lên lịch! Quý khách hãy bấm OK/Đóng và chờ trong giây lát, hệ thống sẽ thông báo nếu đặt lịch thành công!");
+            event.preventDefault();
+            sendData();
+        });
+    });
+</script>
+
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* The Modal (background) */
+    /* The Modal (background) */
+    .booking_app_modal {
+
+        width: 98% !important;
+        max-width: 98% !important;
+        height: auto !important; /* Full height */
+        border: 0px solid;
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 999; /* Sit on top */
+        padding-top: 2px; /* Location of the box */
+        left: 1%;
+        right: 1%;
+        /* Enable scroll if needed */
+        background-color: #111111; /* Fallback color */
+
+    }
+
+    .booking_app_modal-body {
+        overflow: auto;
+        position: absolute;
+        background-color: #fefefe;
+        left: 1%;
+        right: 1%;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 98%;
+        max-height: calc(100vh - 210px);
+        overflow-y: auto;
+
+    }
+
+
+    /* The Close Button */
+    /* The Close Button */
+    .booking_app_modal_close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .booking_app_modal_close:hover,
+    .booking_app_modal_close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .next-input, .next-input--stylized {
+        border: 1px solid #e3e9ed;
+        color: #212121;
+        font-size: 14px;
+        padding: 10px;
+        height: 40px;
+        border-radius: 4px;
+        line-height: 18px;
+        display: block;
+        width: 100%;
+        transition: all .2s ease-out;
+        outline: none
+    }
+</style>
+<style>
+    .form-control {
+        display: block;
+        width: 100%;
+        height: 80px;
+        padding: 8px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555555;
+        background-color: #ffffff;
+        background-image: none;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+    }
+
+    .form-control:focus {
+        border-color: #66afe9;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6)
+    }
+
+    .form-control::-moz-placeholder {
+        color: #999999;
+        opacity: 1
+    }
+
+    .form-control:-ms-input-placeholder {
+        color: #999999
+    }
+
+    .form-control::-webkit-input-placeholder {
+        color: #999999
+    }
+
+    .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+        background-color: #eeeeee;
+        opacity: 1
+    }
+
+    .form-control[disabled], fieldset[disabled] .form-control {
+        cursor: not-allowed
+    }
+
+    textarea.form-control {
+        height: 100px
+    }
+
+    .swatch .swatch-element label {
+        display: block;
+        margin: 0;
+        background: #fff;
+        width: 150px;
+        height: 40px;
+        line-height: 40px;
+        position: relative;
+        border: 1px solid #e5e5e5;
+        font-size: 12px;
+        font-weight: 500;
+        text-align: center;
+        cursor: pointer;
+    }
+</style>
+ 
+
+
+

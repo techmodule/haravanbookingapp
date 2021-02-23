@@ -1,23 +1,3 @@
-# Mã nguồn dự án mobile app đặt lịch kết nối Haravan.
-***
-## Thiết lập môi trường
-### Cài đặt Yarn:
-* cd TMCARe
-```https://reactnative.dev/docs/environment-setup```
-* Chạy lệnh trong terminal: yarn install
-### Kết nối Expo:
-* https://docs.expo.io/workflow/expo-cli/
-### Chạy ứng dụng trên expo
-#### Khởi động yarn
-* terminal```yarn start``` # you can open iOS, Android, or web from here, or run them directly with the commands below.
-* terminal```yarn android```
-* terminal```yarn ios```
-* terminal```yarn web```
-### Build sang Ios và Android:
-#### Xem hướng dẫn chi tiết tại: 
-```https://docs.expo.io/distribution/building-standalone-apps/```
-*  terminal```expo build:android```
-*  terminal```expo build:ios```
 # Booking App API
 * Root URL: ```https://booking-app.vn/```
 ### API danh sách biến thể đặt lịch
@@ -252,7 +232,3 @@
             </script>
             ```
 
-* url ```/api/book```
-* headers: ```Không có```
-* shop_domain là haravan url của shop, ví dụ: ```https://booking-app.myharavan.com/``` hoặc ```https://yourdomain.com/```
-* Tham khảo thêm về liqid haravan: ```https://docs.haravan.com/blogs/co-ban```

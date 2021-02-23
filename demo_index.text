@@ -1,0 +1,253 @@
+<h1 class="hidden entry-title">{{shop.name}}</h1>
+<!-- demo booking app -->
+<!-- Cài đặt lịch ra trang chủ haravan, có thể hiệu chỉnh theme -->
+             <iframe id="booking_app_iframe" width="100%" height="500px" src="https://booking-app.vn/book_css_iframe?shop_domain={{ shop.domain }}" title="{{ shop.domain }}"></iframe>
+            <div class="wrapper-heading-home animation-tran text-center">
+            <input type="date" id="booking_app_change_date_to_show">
+            <button class="btn-primary" id = "booking_date_choose_submit_button">Chọn ngày</button>
+
+                </div>
+            <!-- có thể thay thế source để lịch hiển thị dạng dọc src="https://booking-app.vn/book_css_iframe?shop_domain={{ shop.domain }}&vertical=1" -->
+            <!-- Kết thúc phần html -->
+
+
+<!-- Kết thúc banner nhúng lịch -->
+<!-- Nhóm 1 -->
+
+{% if settings.use_collection_one_products %}
+<section class="section section-collection">
+	<div class="wrapper-heading-home animation-tran text-center">
+		<div class="container-fluid">
+			<div class="site-animation">
+				<h2>
+					<a href="{{collections[settings.collection_one].url}}">
+						{% if settings.heading_collection_one  == '' %}
+						{{collections[settings.collection_one].title}}
+						{% else %}
+						{{settings.heading_collection_one}}
+						{% endif %}
+					</a>
+				</h2>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper-collection-1" >
+		{%if collections[settings.collection_one].products.size > 0%}
+		{%if collections[settings.collection_one].products.size > 2%}
+		<div class="container-fluid" >
+			<div class="row">
+				<div class="clearfix content-product-list">
+					{% assign collection_one_size = settings.collection_one_limit %}
+					{% for product in collections[settings.collection_one].products limit: collection_one_size %}
+					<div class="col-md-4 col-sm-6 col-xs-6 pro-loop {% if forloop.last %} pro-loop-lastHide {% endif %}">
+						{% include 'product-loop' with collection.handle %}
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		{% elseif collections[settings.collection_one].products.size > 1 %}
+		<div class="container-fluid" >
+			<div class="row collection-special-two">
+				{% for product in collections[settings.collection_one].products limit: 2 %}
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					{% include 'product-loop-special' with collection.handle %}
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% else %}
+		<div class="container">
+			<div class="collection-special-one">
+				{% for product in collections[settings.collection_one].products limit: 1 %}
+				{% include 'product-loop-special' with collection.handle %}
+				{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+		{% else %}
+		<div class="container-fluid" >
+			<div class="row" >
+				{% include 'no-product-loop' %}
+			</div>
+		</div>
+		{% endif %}
+	</div>
+</section>
+{% endif %}
+{% if settings.show_block_home_category %}
+<div class="wrapper-home-banner" >
+	<div class="clearfix">
+		<div class="col-xs-12 col-sm-4 col-md-4 home-banner-pd">
+			<div class="block-banner-category ratiobox">
+				<a  class="link-banner" href="{{settings.block_home_category1_link}}">
+					<img class="lazyload" data-sizes="auto"
+							 data-src="{{ settings.block_home_category1 }}"  data-lowsrc="{{ settings.block_home_category1 }}"
+							 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+							 alt="{{settings.block_home_category1_alt }}">
+				</a>
+				<div class="caption_banner">
+					<span class="subtitle">{{settings.block_home_category1_subtitle}}</span>
+					<h3>{{settings.block_home_category1_title}}</h3>
+					{% if settings.block_home_category1_button > 0 %}
+					<a class="button" href="{{settings.block_home_category1_link}}">{{settings.block_home_category1_button}}</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-4 col-md-4 home-banner-pd">
+			<div class="block-banner-category ratiobox">
+				<a  class="link-banner" href="{{settings.block_home_category2_link}}">
+					<img class="lazyload" data-sizes="auto"
+							 data-src="{{ settings.block_home_category2 }}"  data-lowsrc="{{ settings.block_home_category2 }}"
+							 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+							 alt="{{settings.block_home_category2_alt }}">
+				</a>
+				<div class="caption_banner">
+					<span class="subtitle">{{settings.block_home_category2_subtitle}}</span>
+					<h3>{{settings.block_home_category2_title}}</h3>
+					{% if settings.block_home_category2_button > 0 %}
+					<a class="button" href="{{settings.block_home_category2_link}}">{{settings.block_home_category2_button}}</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-4 col-md-4 home-banner-pd">
+			<div class="block-banner-category ratiobox">
+				<a  class="link-banner" href="{{settings.block_home_category3_link}}">
+					<img class="lazyload" data-sizes="auto"
+							 data-src="{{ settings.block_home_category3 }}" data-lowsrc="{{ settings.block_home_category3 }}"
+							 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+							 alt="{{settings.block_home_category3_alt }}">
+				</a>
+				<div class="caption_banner">
+					<span class="subtitle">{{settings.block_home_category3_subtitle}}</span>
+					<h3>{{settings.block_home_category3_title}}</h3>
+					{% if settings.block_home_category3_button > 0 %}
+					<a class="button" href="{{settings.block_home_category3_link}}">{{settings.block_home_category3_button}}</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+<!-- Nhóm 2 -->
+{% if settings.use_collection_two_products %}
+<section class="section section-collection">
+	<div class="wrapper-heading-home animation-tran text-center">
+		<div class="container-fluid">
+			<div class="site-animation">
+				<h2>
+					<a href="{{collections[settings.collection_two].url}}">
+						{% if settings.heading_collection_two  == '' %}
+						{{collections[settings.collection_two].title}}
+						{% else %}
+						{{settings.heading_collection_two}}
+						{% endif %}
+					</a>
+				</h2>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper-collection-2" >
+		{% assign collection_two_size = settings.collection_two_limit %}
+		{%if collections[settings.collection_two].products.size > 0%}
+
+		{%if collections[settings.collection_two].products.size > 2%}
+		<div class="container-fluid" >
+			<div class="row">
+				<div class="clearfix content-product-list ">
+					{% for product in collections[settings.collection_two].products limit: collection_two_size %}
+					<div class="col-md-4 col-sm-6 col-xs-6 pro-loop {% if forloop.last %} pro-loop-lastHide {% endif %}">
+						{% include 'product-loop' with collection.handle %}
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		{% elseif collections[settings.collection_two].products.size > 1 %}
+		<div class="container-fluid" >
+			<div class="row collection-special-two">
+				{% for product in collections[settings.collection_two].products limit: 2 %}
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					{% include 'product-loop-special' with collection.handle %}
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% else %}
+		<div class="container">
+			<div class="collection-special-one">
+				{% for product in collections[settings.collection_two].products limit: 1 %}
+				{% include 'product-loop-special' with collection.handle %}
+				{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+		{% else %}
+		<div class="container-fluid" >
+			<div class="row" >
+				{% include 'no-product-loop' %}
+			</div>
+		</div>
+		{% endif %}
+	</div>
+</section>
+{% endif %}
+{% if settings.home_about_show %}
+<div class="wrapper-home-information animation-tran" >
+	<div class="container-fluid">
+		<div class="flex-container-information">
+			<div class="col-md-6 col-sm-12 col-xs-12 wrap-pd-infor wrap-flex-align flex-column box_stick">
+				<div class="box-banner-inf">
+					<div class="content site-animation">
+						<h2 class="title dark">{{settings.home_about_title}}</h2>
+						{% if settings.home_about_button != empty %}
+						<a class="button" href="{{settings.home_about_link}}" title="{{settings.home_about_button}}">
+							<span>{{settings.home_about_button}}</span>
+						</a>
+						{% endif %}
+					</div>
+				</div>
+				<div class="container-background">
+					<img class="lazyload"
+							 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+							 data-src="{{ settings.home_about_image }}" alt="{{settings.home_about_title}}">
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12 col-xs-12 wrap-pd-infor wrap-flex-align flex-column">
+				<div class="inf-content site-animation">
+					{{pages[settings.home_about_page].content}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+
+<script>
+            $('#booking_date_choose_submit_button').click(function () {
+                //this is just getting the value that is selected
+                var book_date = document.getElementById("booking_app_change_date_to_show").value;
+                var iframe_link = 'https://booking-app.vn/book_css_iframe?shop_domain='+ '{{ shop.domain }}'+'&book_date=' + book_date;
+                $('#booking_app_iframe').attr('src', iframe_link);
+            });
+        </script>
+        <script>
+                $('#my_modal').on('show.bs.modal', function (e) {
+                    var free_time = $(e.relatedTarget).data('book-id');
+                    $("#free_time").prepend('<option value="' + free_time+ '"'+'selected>' + free_time+ '</option>');
+                });
+         </script>
+        <!-- First include jquery js -->
+        <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+        <!-- Then include bootstrap js -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+
