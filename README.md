@@ -1,5 +1,6 @@
 # Booking App API
-* Root URL: ```https://booking-app.vn/```
+* Root URL: 
+```https://booking-app.vn/```
 ##Code mẫu tham khảo ở các file .txt:
 * Trang nhóm sản phẩm: ```colection_demo.txt```
 * Trang sản phẩm: ```demo_product.txt```
