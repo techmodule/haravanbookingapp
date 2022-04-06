@@ -1,4 +1,4 @@
-# Bàn giao hướng dã sử dụng đặt lịch bóng rổ
+# Bàn giao hướng dẫn sử dụng đặt lịch bóng rổ
 
 ## Luồng hoạt động
 ###Bien san pham thanh dinh vu voi the tag: duration_time_
