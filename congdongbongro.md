@@ -758,7 +758,7 @@ function clickFreeTime(i) {
     </div>
 </form>                          
 ```
-#####Hien thi danh sach cac dich vu cua chi nhanh, va thong bao khi dat lich thanh cong
+##### Hien thi danh sach cac dich vu cua chi nhanh, va thong bao khi dat lich thanh cong
 ```html
 
 <div id="services"></div>
