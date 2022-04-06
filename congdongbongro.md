@@ -3,8 +3,7 @@
 ## Luồng hoạt động
 ### Bien san pham thanh dinh vu voi the tag: duration_time_
 ```Vi du : duation_time_60 thi san pham day tro thanh dich vu co thoi gian thuc hien la 60 PHUT
- ```
-```Luu y: Tat ca bien the deu tro thanh dich vu voi thoi gian tuong tu```
+ Luu y: Tat ca bien the deu tro thanh dich vu voi thoi gian tuong tu```
 ### Cơ chế sử dụng templale liquid cho trang nội dung.
 
 #### Link truy cập tạo trang đặt lịch:
