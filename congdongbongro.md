@@ -26,6 +26,7 @@ https://congdongbongro.myharavan.com/admin/sale_channels/web/pages/1002429134
 https://congdongbongro.myharavan.com/admin/sale_channels/web/themes/1000844549/edit
 
 #### Menu trái chọn page.booking-app.liquid.
+###### Code mau cua theme supllo: `https://github.com/techmodule/haravanbookingapp/blob/main/booking-app.liqid-suplo.md`
 
 #### Chỉnh sửa css để đổi màu (dưới cùng của code):
 
