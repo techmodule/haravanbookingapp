@@ -95,8 +95,12 @@
 </div>
 ```
 
-#### Chèn đoạn code này vào trong hàm chọn biến thể, ví dụ:
-
+#### Chèn đoạn code này vào trong hàm chọn biến thể
+```javascript
+document.getElementById("free_time_render").innerHTML = '<h3>Đang tải dữ liệu</h3>';
+    await VariantFreeTime();
+```
+####  ví dụ:
 ```javascript
  $('#add-item-form #variant-swatch-1 .swatch-element[data-value = "' + _key + '"]').addClass('soldout');
 setTimeout(async function () {
