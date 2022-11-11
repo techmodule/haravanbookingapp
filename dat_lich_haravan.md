@@ -96,6 +96,7 @@
                                         </div>
                                 </form>
                             </div>
+	</div>
 ```
 
 #### Chèn đoạn code này vào trong hàm chọn biến thể
