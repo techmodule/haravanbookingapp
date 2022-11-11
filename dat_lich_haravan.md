@@ -122,6 +122,7 @@ setTimeout(async function () {
 
 ```javascript
 
+
 <script>
     function makeListByItemPerRow(itemList, itemPerRow) {
         let list_len = 100;
@@ -207,6 +208,8 @@ setTimeout(async function () {
     }
 
     async function VariantFreeTime() {
+			  var free_time_render = '<h2>Đang tải dữ liệu</h2>';
+				document.getElementById("free_time_render").innerHTML = free_time_render;
         let dates = document.getElementById("date");
         var date = dates.getElementsByClassName("btn_date_active")[0].value;
         var str_date = formatDate(date);
@@ -228,14 +231,17 @@ setTimeout(async function () {
             }
         }
         let response = await fetch(new_free_time_url, otpions);
+			 free_time_render = '<h2>Bắt đầu hiển thị thời gian rảnh</h2>';
+				document.getElementById("free_time_render").innerHTML = free_time_render;
         let repsone_json = await response.json();
         //alert("True")
         if (repsone_json.status) {
             //alert("True")
+					free_time_render = '';
+				  document.getElementById("free_time_render").innerHTML = free_time_render;
             let data = repsone_json.data;
             if (data !== null && typeof data.free_time !== "undefined" && data.free_time !== null) {
                 let free_time = data.free_time;
-                var free_time_render = '';
                 if (free_time.length === 0) {
                     free_time_render = '<h2>Ngày này đã kín lịch, vui lòng chọn ngày khác</h2>'
                 } else {
@@ -265,7 +271,6 @@ setTimeout(async function () {
             } else {
                 free_time_render = '<h2>Chi nhánh chưa thiết lập đặt  lịch</h2>'
             }
-
 
             document.getElementById("free_time_render").innerHTML = free_time_render;
         } else {
@@ -351,6 +356,7 @@ setTimeout(async function () {
                         console.log('Success:', result);
                     })
                     .catch(error => {
+                        book_button_render = '<h3>Đặt lịch THẤT BẠI, tải lại trang nếu muốn đặt lịch khác</h3>';
                         document.getElementById("book_button_render").innerHTML = book_button_render;
                         VariantFreeTime();
                         alert("Xảy ra lỗi khi đặt lịch, vui lòng liên hệ shop để đặt" + error.toString());
